@@ -1,6 +1,6 @@
 import './App.css'
 import  { Header }  from "./header.jsx";
-import FecthData from './FechData.jsx';
+import ThreadList from './ThreadList.jsx';
 
 const App = () => {
 
@@ -8,7 +8,7 @@ const App = () => {
   return (
   <div>
     <Header/>
-    <FecthData/>
+    <ThreadList/>
   </div>
   
   )
