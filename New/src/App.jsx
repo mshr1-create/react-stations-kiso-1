@@ -5,7 +5,7 @@ import ThreadCreate from './ThreadCreate.jsx';
 
 const App = () => {
 
- 
+
   return (
   <div>
     <Header/>

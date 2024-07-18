@@ -35,11 +35,15 @@ const ThreadList = () => {
       
       {loading && <p>Loading...</p>} {/* //loadingがtrueの場合、"Loading..."を表示 */}
       {error && <p style={{ color: 'red' }}>{error}</p>} {/*errorがtrueの場合、エラーメッセージを赤色で表示*/}
-      <ul>
-        {threads.map(thread => (
-          <li key={thread.id}>{thread.title}</li>
-        ))} {/*threads配列をmap関数でリストアイテムに変換*/}
-      </ul>
+      <table className="thread-table">
+        <tbody>
+          {threads.map(thread => (
+            <tr key={thread.id}>
+              <td>{thread.title}</td>
+            </tr>
+          ))} {/*threads配列をmap関数でリストアイテムに変換*/}
+        </tbody>
+      </table>
       <button onClick={handleNext}>次の10件</button>
     </div>
   );
