@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const ThreadList = () => {
@@ -7,6 +8,7 @@ const ThreadList = () => {
   const [offset, setOffset] = useState(0); //オフセット
   const [loading, setLoading] = useState(false); //ローディング状態の管理
   const [error, setError] = useState(null); //エラーメッセージ
+  const navigate = useNavigate(); // useNavigateを使用してナビゲートする
 
   useEffect(() => {
     const fetchThreads = async () => {
@@ -32,7 +34,6 @@ const ThreadList = () => {
 
   return (
     <div>
-      
       {loading && <p>Loading...</p>} {/* //loadingがtrueの場合、"Loading..."を表示 */}
       {error && <p style={{ color: 'red' }}>{error}</p>} {/*errorがtrueの場合、エラーメッセージを赤色で表示*/}
       <table className="thread-table">
@@ -45,6 +46,8 @@ const ThreadList = () => {
         </tbody>
       </table>
       <button onClick={handleNext}>次の10件</button>
+      {/*引数を取らない関数を定義する場合、引数リストは空のままにする */}
+      <button onClick={() => navigate('/threads/new')}>新規スレッド作成する</button>
     </div>
   );
 };

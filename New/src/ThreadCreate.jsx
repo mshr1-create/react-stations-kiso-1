@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ThreadCreate = () => {
   const [title, setTitle] = useState(''); //スレッドのタイトル
   const [loading, setLoading] = useState(false); //ローディング状態の管理
   const [error, setError] = useState(null); //エラーメッセージ
   const [success, setSuccess] = useState(null); //成功メッセージ
+  const navigate = useNavigate(); // useNavigateを使用してナビゲートする
+
 
   //handleSubmit関数を非同期関数として宣言。(e)はイベントオブジェクトを表し、イベントハンドラ関数の引数として渡される。
   const handleSubmit = async (e) => { 
@@ -21,6 +24,7 @@ const ThreadCreate = () => {
       //非同期関数内ではawaitを使用して、非同期処理（例えば、APIリクエストの完了）を待つことが出来る
       setSuccess('スレッドが作成されました！');
       setTitle(''); //入力フィールドをクリア
+      navigate('/'); // スレッド一覧ページに遷移
     } catch (err) {
       setError('スレッドの作成に失敗しました。');
     }
@@ -29,6 +33,7 @@ const ThreadCreate = () => {
 
   return (
     <div>
+      {/*これを加えたら空白ページに*/}
       <h2>新規スレッド作成</h2>
       <form onSubmit={handleSubmit}>
         <div>
