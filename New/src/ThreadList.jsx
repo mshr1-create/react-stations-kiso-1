@@ -39,10 +39,11 @@ const ThreadList = () => {
       <table className="thread-table">
         <tbody>
           {threads.map(thread => (
-            <tr key={thread.id}>
+           <tr key={thread.id} onClick={() => navigate(`/threads/${thread.id}`)}> {/* スレッドをクリックすると投稿一覧ページに遷移。${}はテンプレートリテラル（template literals）と呼ばれる文字列の一部*/}
               <td>{thread.title}</td>
             </tr>
           ))} {/*threads配列をmap関数でリストアイテムに変換*/}
+          {/*Reactでリストをレンダリングするとき、各要素には一意のキーが必要となる。このキーは、Reactが各要素を識別し、効率的に更新するために使われる。ここでは、スレッドのID（thread.id）をキーとして使用している。 */}
         </tbody>
       </table>
       <button onClick={handleNext}>次の10件</button>
