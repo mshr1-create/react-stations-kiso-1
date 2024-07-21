@@ -33,7 +33,6 @@ const ThreadCreate = () => {
 
   return (
     <div>
-      {/*これを加えたら空白ページに*/}
       <h2>新規スレッド作成</h2>
       <form onSubmit={handleSubmit}>
         <div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const ThreadIdList = () => {
   const { thread_id } = useParams(); // パラメータからthread_idを取得
@@ -8,6 +10,8 @@ const ThreadIdList = () => {
   const [offset, setOffset] = useState(0); // オフセット
   const [loading, setLoading] = useState(false); // ローディング状態の管理
   const [error, setError] = useState(null); // エラーメッセージ
+  const [newPost, setNewPost] = useState(""); // 新しい投稿内容
+  const navigate = useNavigate(); // useNavigateを使用してナビゲートする
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,6 +35,25 @@ const ThreadIdList = () => {
     setOffset(prevOffset => prevOffset + 10); // コールバック関数(状態の更新に使用)
   }; // offsetの値を更新 次の10件
 
+  const handlePost = async () => {
+    if (!newPost) return;
+    setLoading(true); // ローディング状態(true)
+    setError(null); // エラーメッセージ(null)
+    try {
+      await axios.post(`https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`, {
+        post: newPost
+      });
+      setNewPost(""); // 投稿後に入力フィールドをクリア
+      const response = await axios.get(`https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`, {
+        params: { offset } // 再度投稿リストを取得
+      });
+      setPosts(response.data.posts); // データの更新
+    } catch (err) {
+      setError(err.message); // エラーが起きた時の処理
+    }
+    setLoading(false); // データを取得後、ローディング状態を(false)に設定
+  };
+
   return (
     <div>
       {loading && <p>Loading...</p>} {/* loadingがtrueの場合、"Loading..."を表示 */}
@@ -45,6 +68,16 @@ const ThreadIdList = () => {
         </tbody>
       </table>
       <button onClick={handleNext}>次の10件</button>
+      <button onClick={() => navigate('/')}>Topに戻る</button>{/*一覧に戻る */}
+    
+      <div>
+        <textarea
+          value={newPost}
+          onChange={(e) => setNewPost(e.target.value)}
+          placeholder="ここにメッセージを入力"
+        ></textarea>
+        <button onClick={handlePost}>投稿</button>
+      </div>
     </div>
   );
 };
