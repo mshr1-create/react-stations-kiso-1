@@ -46,8 +46,8 @@ const ThreadCreate = () => {
             required //空のまま送信できないように制限する
           />
         </div>
-        <button type="submit" disabled={loading}>新規スレッド作成</button> {/*disabled={loading}：ローディング中はボタンを無効化*/}
-        <button onClick={() => navigate('/')}>Topに戻る</button>{/*一覧に戻る */}
+        <button onClick={() => navigate('/')} className='btn'>Topに戻る</button>{/*一覧に戻る */}
+        <button type="submit" disabled={loading} className='btnNew'>新規スレッド作成</button> {/*disabled={loading}：ローディング中はボタンを無効化*/}
       </form>
       {loading && <p>作成中...</p>}{/* //loadingがtrueの場合、"Loading..."を表示 */}
       {error && <p style={{ color: 'red' }}>{error}</p>} {/*errorがtrueの場合、エラーメッセージを赤色で表示*/}

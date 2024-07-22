@@ -46,9 +46,9 @@ const ThreadList = () => {
           {/*Reactでリストをレンダリングするとき、各要素には一意のキーが必要となる。このキーは、Reactが各要素を識別し、効率的に更新するために使われる。ここでは、スレッドのID（thread.id）をキーとして使用している。 */}
         </tbody>
       </table>
-      <button onClick={handleNext}>次の10件</button>
+      <button onClick={handleNext} className='btn'>次の10件</button>
       {/*引数を取らない関数を定義する場合、引数リストは空のままにする */}
-      <button onClick={() => navigate('/threads/new')}>新規スレッド作成する</button>
+      <button onClick={() => navigate('/threads/new')} className='btn'>新規スレッド作成する</button>
     </div>
   );
 };

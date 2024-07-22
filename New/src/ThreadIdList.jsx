@@ -67,8 +67,8 @@ const ThreadIdList = () => {
           ))} {/* posts配列をmap関数でリストアイテムに変換 */}
         </tbody>
       </table>
-      <button onClick={handleNext}>次の10件</button>
-      <button onClick={() => navigate('/')}>Topに戻る</button>{/*一覧に戻る */}
+      <button onClick={handleNext} className='btn'>次の10件</button>
+      <button onClick={() => navigate('/')} className='btn'>Topに戻る</button>{/*一覧に戻る */}
     
       <div>
         <textarea
@@ -76,7 +76,7 @@ const ThreadIdList = () => {
           onChange={(e) => setNewPost(e.target.value)}
           placeholder="ここにメッセージを入力"
         ></textarea>
-        <button onClick={handlePost}>投稿</button>
+        <button onClick={handlePost} className='btnPost'>投稿</button>
       </div>
     </div>
   );
