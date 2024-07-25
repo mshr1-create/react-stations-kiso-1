@@ -36,13 +36,14 @@ const ThreadIdList = () => {
   }; // offsetの値を更新 次の10件
 
   const handlePost = async () => {
-    if (!newPost) return;
+    if (!newPost) return; //投稿内容がない場合には、何もせずに終了する。 return は、条件が真（true）である場合に関数の実行を中断して終了させるためのもの。
+    // ここに到達するのは、newPostが空でない場合のみ
     setLoading(true); // ローディング状態(true)
     setError(null); // エラーメッセージ(null)
     try {
       await axios.post(`https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`, {
-        post: newPost
-      });
+        post: newPost //オブジェクトのプロパティ post に値 newPost を設定している。
+      }); //try ブロック内で axios.post を使って、新しい投稿を送信
       setNewPost(""); // 投稿後に入力フィールドをクリア
       const response = await axios.get(`https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`, {
         params: { offset } // 再度投稿リストを取得

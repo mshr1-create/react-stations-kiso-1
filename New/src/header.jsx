@@ -3,7 +3,6 @@ export const Header = () => {
       <div>
         <header className='threadAPIheader'>掲示板</header>
       </div>
-      
     )
   }
   
